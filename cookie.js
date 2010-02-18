@@ -41,21 +41,28 @@ var Cookie = Class.create({
     document.cookie = name + "=" + value + expires + "; path=/";      
   },
   
+  /**
+   *  Cookie#toString() -> String
+   *  
+   *  Returns a value of the [[Cookie]] object.
+  **/
   toString: function() {
     return this.value;
   },
   
+  /**
+   *  Cookie#inspect() -> String
+   *  
+   *  Returns a debug oriented version of the [[Cookie]] object.
+  **/
   inspect: function() {
     return "#<Cookie #{name}:#{value}>".interpolate(this);
   }
 });
 
-/**
- *  namespace Cookie
-**/
 Object.extend(Cookie, {
   /**
-   *  Cookie.set(name, value, expires)
+   *  Cookie.set(name, value, expires) -> Cookie
    *  
    *  Alias of [[Cookie#initialize]].
   **/
@@ -64,12 +71,12 @@ Object.extend(Cookie, {
   },
   
   /**
-   *  Cookie.get(name)
+   *  Cookie.getValue(name) -> String
+   *  - name (String): The name of the cookie to retrieve.
    *  
    *  Returns the value of the cookie with the given name.
-   *  - name (String): The name of the cookie to retrieve.
   **/
-  get: function(name) {
+  getValue: function(name) {
     var c = document.cookie.split(';');
     
     for (var i = 0, cookie; i < c.length; i++) {
@@ -82,15 +89,19 @@ Object.extend(Cookie, {
   },
   
   /**
-   *  Cookie.unset(name)
+   *  Cookie.unset(name) -> Cookie
    *  
    *  Deletes a cookie.
    *  - name (String): The name of the cookie to delete.
-   *  
   **/
   unset: function(name) {
     return Cookie.set(name, "", -1);
   }
 });
 
+/**
+ *  Cookie.erase(name) -> Cookie
+ *  
+ *  Alias of [[Cookie.unset]].
+**/
 Cookie.erase = Cookie.unset;
