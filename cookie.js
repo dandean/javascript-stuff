@@ -33,12 +33,12 @@ var Cookie = Class.create({
 
     if (!Object.isUndefined(expires) && expires !== "")
       expires = "; expires=" + expires;
-    
+      
     this.name    = name;
     this.value   = value;
     this.expires = expires;
     
-    document.cookie = name + "=" + value + expires + "; path=/";      
+    document.cookie = name + "=" + value + (expires || '') + "; path=/";      
   },
   
   /**
