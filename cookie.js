@@ -38,7 +38,7 @@ var Cookie = Class.create({
     this.value   = value;
     this.expires = expires;
     
-    document.cookie = name + "=" + value + (expires || '') + "; path=/";      
+    document.cookie = name + "=" + escape(value) + (expires || '') + "; path=/";
   },
   
   /**
@@ -82,7 +82,7 @@ Object.extend(Cookie, {
     for (var i = 0, cookie; i < c.length; i++) {
       cookie = c[i].split('=');
       if (cookie[0].strip() === name)
-        return cookie[1].strip();
+        return unescape(cookie[1].strip());
     }
     
     return null;
